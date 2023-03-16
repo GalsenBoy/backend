@@ -8,9 +8,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read:collection']],
+    itemOperations:[
+        'get' => [
+            'normalization_context' => ['groups' => ['read:item','read:Article']]
+        ],
+    ]
+)]
 class Article
 {
     #[ORM\Id]
@@ -19,15 +27,19 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:collection'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['read:collection'])]
     private ?string $content = null;
 
     #[ORM\Column]
+    #[Groups(['read:collection'])]
     private ?\DateTimeImmutable $creates_at = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'article')]
+    #[Groups(['read:item'])]
     private Collection $categories;
 
     public function __construct()
