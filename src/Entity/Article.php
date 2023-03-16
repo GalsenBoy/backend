@@ -33,6 +33,7 @@ class Article
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->creates_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
