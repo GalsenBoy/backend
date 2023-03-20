@@ -13,17 +13,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['read:collection']],
-    itemOperations:[
-        'get' => [
-            'normalization_context' => ['groups' => ['read:item','read:Article']]
-        ],
-    ]
+    // itemOperations:[
+    //     'get' => [
+    //         'normalization_context' => ['groups' => ['read:item','read:Article']]
+    //     ],
+    // ]
 )]
 class Article
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read:collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
