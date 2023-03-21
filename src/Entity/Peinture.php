@@ -35,8 +35,11 @@ class Peinture
     #[ORM\Column(length: 255)]
     private ?string $file = null;
 
-    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'imageName', size: 'imageSize')]
+    #[Vich\UploadableField(mapping: 'article_images', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
@@ -111,6 +114,16 @@ class Peinture
         $this->description = $description;
 
         return $this;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
     }
 
     public function getFile(): ?string
