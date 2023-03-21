@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a541a150ccfe42d8849c45e4115282f2",
+    "content-hash": "9166925dc77117b9431e4cfb8661d63c",
     "packages": [
         {
             "name": "api-platform/core",
@@ -1700,6 +1700,56 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
+        },
+        {
+            "name": "espero-soft/dateformat",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/espero-soft/dateformat.git",
+                "reference": "aba79f657f113c49a0947dd4169f65dbb13410b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/espero-soft/dateformat/zipball/aba79f657f113c49a0947dd4169f65dbb13410b9",
+                "reference": "aba79f657f113c49a0947dd4169f65dbb13410b9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EsperoSoft\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Espero-Soft Informatiques",
+                    "email": "contact@espero-soft.com"
+                }
+            ],
+            "description": "This Php library will help you format your dates in number of years, months, days, hours, minutes and seconds.",
+            "keywords": [
+                "akpoli",
+                "date",
+                "dateformat",
+                "espero",
+                "espero-soft",
+                "moment",
+                "mudey"
+            ],
+            "support": {
+                "issues": "https://github.com/espero-soft/dateformat/issues",
+                "source": "https://github.com/espero-soft/dateformat/tree/master"
+            },
+            "time": "2022-09-19T18:03:07+00:00"
         },
         {
             "name": "jms/metadata",
@@ -10313,7 +10363,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "espero-soft/dateformat": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

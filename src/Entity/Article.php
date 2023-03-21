@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiResource;
-use App\Repository\ArticleRepository;
+
 use Cocur\Slugify\Slugify;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use App\Repository\ArticleRepository;
+use EsperoSoft\DateFormat\DateFormat;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
@@ -44,8 +46,12 @@ class Article
     #[Groups(['read:item'])]
     private Collection $categories;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable:true)]
     private ?string $slug = null;
+
+    #[ORM\Column(length: 255,nullable:true)]
+    #[Groups(['read:collection'])]
+    private ?string $fromNow = null;
 
     public function __construct()
     {
@@ -134,6 +140,18 @@ class Article
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getFromNow(): ?string
+    {
+        return $fromNow =  DateFormat::fromNow($this->creates_at);;
+    }
+
+    public function setFromNow(string $fromNow): self
+    {
+        $this->fromNow = $fromNow;
 
         return $this;
     }

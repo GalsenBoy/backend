@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\DBAL\Types\Types;
@@ -10,6 +11,7 @@ use App\Repository\PeintureRepository;
 
 #[ORM\Entity(repositoryClass: PeintureRepository::class)]
 #[Vich\Uploadable]
+#[ApiResource()]
 class Peinture
 {
     #[ORM\Id]
@@ -49,6 +51,7 @@ class Peinture
 
     public function __construct(){
         $this->created_at = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
