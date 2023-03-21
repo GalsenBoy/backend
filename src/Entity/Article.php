@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ArticleRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -43,10 +44,18 @@ class Article
     #[Groups(['read:item'])]
     private Collection $categories;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->creates_at = new \DateTimeImmutable();
+    }
+
+    #[ORM\PrePersist]
+    public function prePersist(){
+        $this->slug = (new Slugify())->slugify($this->name);
     }
 
     public function getId(): ?int
@@ -113,6 +122,18 @@ class Article
         if ($this->categories->removeElement($category)) {
             $category->removeArticle($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
