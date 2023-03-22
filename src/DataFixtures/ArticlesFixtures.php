@@ -17,8 +17,10 @@ class ArticlesFixtures extends Fixture
         $articles = new Article();
         $articles->setName($faker->sentence);
         $articles->setContent($faker->paragraph);
+        // $articles->setSlug($faker->sentence);
         $manager->persist($articles);
        }
+    //    dd($articles);
         $manager->flush();
     }
 }
