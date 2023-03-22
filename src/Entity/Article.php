@@ -3,12 +3,12 @@
 namespace App\Entity;
 
 
+use Carbon\Carbon;
 use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ArticleRepository;
-use EsperoSoft\DateFormat\DateFormat;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -146,8 +146,9 @@ class Article
 
     public function getFromNow(): ?string
     {
-        return $fromNow =  DateFormat::fromNow($this->creates_at);;
+        return Carbon::instance($this->creates_at)->diffForHumans();
     }
+    
 
     public function setFromNow(string $fromNow): self
     {
